@@ -8,6 +8,9 @@ function concat(array1, array2){
   for(let i = 0; i < array2.length; i++) {
     newArray.push(array2[i]);
   }
+
+  newArray.sort();
+  return newArray;
 }
 
 console.log(concat([ 1, 2, 3 ], [ 4, 5, 6 ]), "=?", [ 1, 2, 3, 4, 5, 6 ]);

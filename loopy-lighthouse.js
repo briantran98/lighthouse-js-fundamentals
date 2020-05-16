@@ -1,4 +1,4 @@
-let multipleOfThree = "Loopy";
+/*let multipleOfThree = "Loopy";
 let multipleOfFour = "Lighthouse"
 
 // For loop to count up from 100 to 200
@@ -14,4 +14,24 @@ for (let x = 100; x < 201; x++) {
   } else {
     console.log(x)
   }
+}*/
+
+// Stretch exercise for loopy lighthouse
+
+const loopyLighthouse = function (range, multiples, words) {
+  if(range[0] < range[1]) {
+    for(let i = range[0]; i <= range[1] ; i++ ) {
+      if(i % multiples[0] === 0 && i % multiples[1] === 0) {
+        console.log(words[0] + words[1])
+      } else if (i % multiples[0] === 0) {
+        console.log(words[0]);
+      } else if (i % multiples[1] === 0) {
+        console.log(words[1]);
+      } else {
+        console.log(i);
+      }
+    }
+  }
 }
+
+loopyLighthouse([15, 90], [2, 5], ["Batty", "Beacon"]);
