@@ -1,39 +1,42 @@
-function numberGuesser() {
-  const maxNumber = 100;
+const numberGuesser = () => {
   let prompt = require('prompt-sync')();
   let numberOfGuesses = 0;
-  let numbersGuessed = [];
-  let play = true;
-  let alreadyGuessed = false;
-  let randomNumber = Math.floor(Math.random() * Math.floor(maxNumber));
-
-  while (play) {
-    let guess = prompt('Guess a number or type:'); // Prompt
-
+  const numbersGuessed = [];
+  let randomNumber = generateRandomNumber(100);
+  let over = false;
+  while (!over) {
+    let guess = Number(prompt('Guess a number:')); // Prompt
     if (!numbersGuessed.includes(guess)) {
-      numbersGuessed.push(guess)
-      alreadyGuessed = false;
+      numberOfGuesses++;
+      numbersGuessed.push(guess);
+      over = isHigher(guess, randomNumber, numberOfGuesses);
     } else {
-      alreadyGuessed = true;
-      console.log("Already Guessed!")
-    }
-    
-    if (guess == randomNumber) {
-      numberOfGuesses++;
-      if (numberOfGuesses == 1) {
-        return ("You got it! You took " + numberOfGuesses + " attempt!")
-      } else {
-        return ("You got it! You took " + numberOfGuesses + " attempts!")
-      }
-    } else if (guess > randomNumber && !alreadyGuessed) {
-      numberOfGuesses++;
-      console.log("Too High!");
-    } else if (guess < randomNumber && !alreadyGuessed) {
-      numberOfGuesses++;
-      console.log("Too Low!");
+      console.log("Already Guessed!");
     }
   }
-}
+};
 
+const isHigher = (guess, randomNumber, numberOfGuesses)  => {
+  if (guess > randomNumber) {
+    console.log("Too High!");
+  } else if (guess === randomNumber) {
+    return win(numberOfGuesses);
+  } else {
+    console.log("Too Low!");
+  }
+};
 
-console.log(numberGuesser());
+const win = (tries) => {
+  let plural = "";
+  if (tries > 1) {
+    plural = "s";
+  }
+  console.log(`You got it! You took ${tries} attempt${plural}!`);
+  return true;
+};
+
+const generateRandomNumber = (maxNumber) => {
+  return Math.floor(Math.random() * Math.floor(maxNumber));
+};
+
+numberGuesser();
